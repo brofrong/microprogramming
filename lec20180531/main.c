@@ -21,8 +21,8 @@ int _start(){
 	videoAddr=*(char**) (0x8000);
 	dataAddres = *(char**) (0x8004);
 
-	char message[255] = "hello world is it work? qwertyuiopasdfghjklzxcvbnm\nmisha good boy 1234567890 _-+=()!?., aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; 
-	drowString(message,50,50,0xffffff,2,5);
+	char message[255] = "Your ad here: 8(800)555-35-35"; 
+	drowString(message,0,0,0x00ff00,2,5);
 
 	int current,last,ascii;
 	int i,x=0,multiplayer=2,offset=5,y=200;
@@ -42,7 +42,7 @@ int _start(){
 				}
 			}
 			if(ascii!=0){
-				//drowChar(x,600,0xff0000,2,ascii);
+				drowChar(x,600,0xff0000,2,ascii);
 				//x+=15;		
 				if (ascii==' '){//отработка пробела
 					x += (5*multiplayer) + offset;
@@ -161,7 +161,6 @@ void drowString(char *message,int x,int y,int color,int multiplayer,int offset){
 		drowChar(x,y,color,multiplayer,message[i]);
 		x += (5*multiplayer) + offset; //позиция для следующей буквы
 		i++;
-		//stopForSeckPlz();
 	}
 }
 
@@ -312,35 +311,3 @@ void drowBackGround(int color){ // градиент следует перера�
 		color=defoltColor;
 	}
 }
-
-void stopForSeckPlz(){ //как же всё быстро отрисовываеться, пожайлуста помедленее!
-	for(int i=0;i<10000;i++){
-		for(int j=0;j<1000;j++);
-	}
-}
-/*
-void drowString(char *message,int x,int y,int color,int multiplayer,int offset){
-	int i=0;
-	int startx=x;
-	while (message[i]){ 
-		if (message[i]==' '){//отработка пробела
-			x += (5*multiplayer) + offset;
-			i++;
-			continue;
-		}
-		if (message[i]=='\n'){ //отраюота переноса строки
-			x=startx;
-			y+=offset+(multiplayer*7);
-			i++;
-			continue;
-		}
-		if ((x + (5*multiplayer) + offset)>1024){
-			x=startx;
-			y+=offset+(multiplayer*7);
-		}
-		drowChar(x,y,color,multiplayer,message[i]);
-		x += (5*multiplayer) + offset; //позиция для следующей буквы
-		i++;
-		//stopForSeckPlz();
-	}
-}*/
