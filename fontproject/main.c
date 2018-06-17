@@ -21,8 +21,9 @@ int _start(){
 	videoAddr=*(char**) (0x8000);
 	dataAddres = *(char**) (0x8004);
 
-	char message[255] = "hello world is it work? qwertyuiopasdfghjklzxcvbnm\nmisha good boy 1234567890 _-+=()!?., aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; 
-	drowString(message,50,50,0xffffff,2,5);
+	char message[255] = "";
+	drowChar(0,0,0x00ff00,2,getSeconds())
+	//drowString(message,0,0,0x00ff00,2,5);
 
 	int current,last,ascii;
 	int i,x=0,multiplayer=2,offset=5,y=200;

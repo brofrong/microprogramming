@@ -13,15 +13,14 @@ int getKey();
 int keyPressed();
 char *videoAddr;
 char *dataAddres;
-
+char getSeconds();
 
 
 
 int _start(){
 	videoAddr=*(char**) (0x8000);
 	dataAddres = *(char**) (0x8004);
-
-	char message[255] = "Your ad here: 8(800)555-35-35"; 
+	char message[255]="";
 	drowString(message,0,0,0x00ff00,2,5);
 
 	int current,last,ascii;
@@ -84,6 +83,12 @@ int getKey(){
 int keyPressed(){
 	asm("xor eax,eax");
 	asm("in al,0x61");
+}
+
+char getSeconds(){
+	asm("xor eax, eax");
+	asm("out 0x70, ax");
+	asm("in ax,0x71");
 }
 
 void drowChar(int x,int y,int color,int multiplayer, char letter){
@@ -305,7 +310,7 @@ void drowBackGround(int color){ // градиент следует перера�
 		for (j=0;j<1024;j++){
 			setPixel(j,i,color);
 			if (!(j%5)){
-				color+=0x000100;
+				color+=0x00ff00;
 				}
 		}
 		color=defoltColor;
