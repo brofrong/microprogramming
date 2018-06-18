@@ -1,6 +1,6 @@
 org 0x7c00
 mov ah,2
-mov al,20;сектора
+mov al,20;секторы
 mov bx,0x8008
 mov cl,2
 mov ch,0
@@ -10,7 +10,7 @@ int 0x13
 
 ;сегмент данных
 mov ah,2
-mov al,20 ;сектора
+mov al,20 ;секторы
 mov bx,0xf000
 mov cl,21; сектор диска, с которого нужно считать
 mov ch,0
@@ -38,12 +38,12 @@ or eax,1
 mov cr0,eax
 jmp CODE_D:0x8008
 ret
-;дискриптор
+;дескриптор
 gdt_begin:
   null_desc:
   dd 0
   dd 0
-code_desc: ; таблица под код
+code_desc: ; таблица под сегмент кода
   dw 0xffff
   dw 0
   db 0

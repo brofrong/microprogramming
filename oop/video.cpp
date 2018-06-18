@@ -25,7 +25,7 @@ public:
 	}
 	
 	void drawChar(int x,int y,int color,int multiplier, char letter){
-		if (letter>='a'&&letter<='z'){
+		if (letter>='a'&&letter<='w'){
 			letter-=0x20;
 		}
 		int currpos=36*(int)letter;

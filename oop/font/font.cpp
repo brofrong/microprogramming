@@ -453,24 +453,16 @@ unsigned char spc[7][5]={
 {0,0,0,0,0}};
 
 unsigned char gvoid[7][5]={
+{1,1,1,1,1},
+{1,1,1,1,1},
 {1,0,1,0,1},
-{0,1,0,1,0},
+{1,1,0,1,1},
 {1,0,1,0,1},
-{0,1,0,1,0},
-{1,0,1,0,1},
-{0,1,0,1,0},
-{1,0,1,0,1}};
+{1,1,1,1,1},
+{1,1,1,1,1}};
 
 struct symbol unprintable;
 struct symbol space;
-
-/*
-const int rows = 3;
-const int columns = 3;
-int myint[rows][columns]={{1,2,3},{4,5,6},{7,8,9}};
-int favint[rows][columns];
-std::copy(&myint[0][0], &myint[0][0]+rows*columns,&favint[0][0]);
-*/
 
 void initascii(){
 unprintable.printable=0;
@@ -708,13 +700,13 @@ int main(int argc, char const *argv[])
 	fp = fopen("font.tf","w");
 	for(int cnt=0; cnt<128; cnt++){
 		fwrite(&asciitable[cnt].printable,1,1,fp);
-//		printf("%i\n", asciitable[cnt].printable);
+		printf("%i\n", asciitable[cnt].printable);
 		for (int i=0;i<7;i++){
 			for (int j=0;j<5;j++){
 				fwrite(&asciitable[cnt].glyph[i][j],1,1,fp);
-//				printf("%i", asciitable[cnt].glyph[i][j]);
+				printf("%i", asciitable[cnt].glyph[i][j]);
 			}
-///			printf("\n");
+			printf("\n");
 		}	
 	}
 	return 0;
