@@ -18,7 +18,7 @@ code.close()
 
 data = open("font/font.tf","rb")
 dataText = data.read();
-disc.seek(0x2800,0);
+disc.seek(0x3000,0);
 disc.write(dataText);
 data.close();
 
