@@ -16,7 +16,7 @@ codeText = code.read();
 disc.write(codeText)
 code.close()
 
-data = open("font/font.tf","rb")
+data = open("core/font/font.tf","rb")
 dataText = data.read();
 disc.seek(0x3000,0);
 disc.write(dataText);

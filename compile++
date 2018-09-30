@@ -1,28 +1,24 @@
 #!/bin/bash
-currpath=${PWD}
-scrpath=$(dirname $0)
-
-g++ -nostdlib -m32 -fpic -masm=intel $currpath/main.cpp -o $currpath/main.bin
+g++ -nostdlib -m32 -fpic -masm=intel core/main.cpp -o main.bin
 if [ $? -ne 0 ]; then
 	echo "gcc error"
 	exit -1;
 fi
-objcopy -O binary $currpath/main.bin
+objcopy -O binary main.bin
 if [ $? -ne 0 ]; then
 	echo "objcopy error"
 	exit -1;
 fi
-nasm -f bin $scrpath/boot.asm -o $currpath/boot.bin
+nasm -f bin boot.asm -o boot.bin
 if [ $? -ne 0 ]; then
 	echo "nasm error"
 	exit -1;
 fi
 
-cp $scrpath/compile.py $currpath/compile.py
-python3 $currpath/compile.py
+python3 compile.py
 
-rm $currpath/main.bin
-rm $currpath/boot.bin
-rm $currpath/compile.py
+rm main.bin
+rm boot.bin
+rm compile.py
 
-qemu-system-i386 $currpath/discpy.img
+qemu-system-i386 discpy.img
