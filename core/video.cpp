@@ -7,6 +7,10 @@ class video
 {
 public:
 	int color = 0xffffff;
+	int printX = 0;
+	int printY = 0;
+
+
 	video(){
 		this->videoAddr=*(char**) (0x8000);
 		this->dataAddres=*(char**) (0x8004);

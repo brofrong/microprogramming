@@ -1,10 +1,12 @@
-#include "video.cpp"
+//#include "video.cpp"
 //#include "keyboard.cpp"
 #include "window.cpp"
+#include "stdio.cpp"
 int _start(){
-	video screen = video();
+	//video screen = video();
 	//keyboard keys=keyboard();
 	window win = window();
+	out io = out();
 	//screen.drawSquare(100,100,200,200);
 	//win.drow();
 
@@ -36,11 +38,22 @@ int _start(){
 		
 	}
 	*/
-	int i=0;
-	screen.color = 0xff0000;
+	int i=0xab12cdef;
+	io.column=100;
+	io.line=200;
+	io.multiply=3;
+	io.padding=10;
+	io.printChar('1');
+	io.printChar('a');
+	io.printChar('g');
+	io.printString("hello World!");
+	io.printInt(1623129123);
+	io.NL();
+	io.printString("i:");
+	io.printIntH(i);
 	while(1){
 		win.draw();
-
+		
 	};
 	return 0;
 }
