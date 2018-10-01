@@ -5,15 +5,15 @@ public:
 	char previous='3';
 	char pull() {
 		char current = this->getKey();
-		if (this->previous != current){
-			this->previous=current;
-			return this->toascii(current);
-		}
+		if (this->previous != current) {
+				this->previous=current;
+				return this->toascii(current);
+			}
 		return 0;
 	}
 	
 	char toascii(char scan) {
-		return this->translist[scan];
+		return this->translist[scan]; 
 	}
 	
 	char getAscii(){

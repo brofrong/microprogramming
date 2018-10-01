@@ -1,8 +1,5 @@
-class CMOS
-{
-public:
-	
-	unsigned char getSeconds(){
+
+unsigned char getSeconds(){
 	asm("xor eax, eax");
 	asm("out 0x70, ax");
 	asm("in ax, 0x71");
@@ -22,5 +19,4 @@ void binify(char* str, unsigned char ch){
 			str[i]='0';
 		}
 		ch/=2;
-	}
-};
+}

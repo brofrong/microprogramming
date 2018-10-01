@@ -1,5 +1,10 @@
 #!/bin/bash
-g++ -nostdlib -m32 -fpic -masm=intel core/main.cpp -o main.bin
+g++ -m32 -c core/math.cpp -o core/tmp/math.o
+g++ -m32 -c core/video.cpp -o core/tmp/video.o
+g++ -m32 -c core/window.cpp -o core/tmp/window.o
+#g++ -m32 -c -masm=intel core/CMOS.cpp -o core/tmp/CMOS.o
+
+g++ -nostdlib -m32 -fpic -masm=intel core/main.cpp core/tmp/*.o -o main.bin
 if [ $? -ne 0 ]; then
 	echo "gcc error"
 	exit -1;
@@ -19,6 +24,6 @@ python3 compile.py
 
 rm main.bin
 rm boot.bin
-rm compile.py
+rm core/tmp/*.o
 
 qemu-system-i386 discpy.img
