@@ -36,10 +36,11 @@ int _start(){
 		
 	}
 	*/
+	int i=0;
 	screen.color = 0xff0000;
 	while(1){
 		win.draw();
-		screen.drawSquare(100,100,200,200);
+
 	};
 	return 0;
 }
