@@ -1,3 +1,6 @@
+#ifndef KEYBOARD_CPP
+#define KEYBOARD_CPP
+
 class keyboard
 {
 public:
@@ -5,7 +8,7 @@ public:
 	char previous='3';
 	char pull() {
 		char current = this->getKey();
-		if (this->previous != current) {
+		if ((this->previous != current) && (current <100)) {
 				this->previous=current;
 				return this->toascii(current);
 			}
@@ -31,3 +34,5 @@ public:
 	}
 	
 };
+
+#endif

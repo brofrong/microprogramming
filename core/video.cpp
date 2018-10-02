@@ -100,7 +100,7 @@ public:
 	}
 
 	
-	void drawChar(int x,int y,int multiplier, char letter){
+	/*void drawChar(int x,int y,int multiplier, char letter){
 		if (letter>='a'&&letter<='w'){
 			letter-=0x20;
 		}
@@ -144,7 +144,7 @@ public:
 			x += (5*multiplier) + offset; //позиция для следующей буквы
 			i++;
 		}
-	}
+	}*/
 
 
 private:

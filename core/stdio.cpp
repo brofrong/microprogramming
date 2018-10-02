@@ -2,20 +2,25 @@
 #define STDIO_CPP
 
 #include "video.cpp"
+#include "CMOS.h"
+#include "keyboard.cpp"
 
 class out
 {
 public:
 
 	video screen = video();
+	keyboard key = keyboard();
 	out(){
 		this->dataAddres=*(char**) (0x8004);
 	}
 
-	int column,line,multiply=1,padding=3;
+	int column=58,line=0,multiply=2,padding=3;
 	int startLine = 0;
 
-
+	void color(int a){
+		screen.color=a;
+	}
 
 	void printChar(char letter){
 		if (letter>='a'&&letter<='w'){
@@ -113,10 +118,85 @@ public:
 		}
 	}
 
+	
+
+
+	void drawPointer(){
+		if(pointerDelay>30){
+			pointerDelay=0;
+			if(pointerFlag ){
+				pointerFlag=0;
+				screen.color=0xaaaaaa;
+				screen.drawSquare(line+this->multiply,column+this->multiply,line+(4*this->multiply),column+(6*this->multiply));
+			}else{
+				pointerFlag=1;
+				screen.color=0x000000;
+				screen.drawSquare(line+this->multiply,column+this->multiply,line+(4*this->multiply),column+(6*this->multiply));
+			}	
+		}
+		pointerDelay++;
+	
+	}
+
+	void input(){
+		ascii = key.pull();
+		if(ascii){
+			oldAscii=ascii;
+			if(ascii=='\n'){
+				NL();
+			} else if(ascii=='\b'){
+				if(line>0){
+					this->line-=5*this->multiply+this->padding;
+					screen.color=0x000000;
+					screen.drawSquare(line,column,line+(5*this->multiply),column+(7*this->multiply));
+				}else {
+					//перенос на строчку назад, но где она кончилась?
+					this->line=1024;
+					this->column-=this->padding+(this->multiply*7);
+				}
+			}else{
+				if ((this->line + (5*this->multiply) + this->padding)>1024){
+					NL();
+				} 
+				screen.color=0xffffff;
+				printChar(ascii);
+			}
+		}
+	}
+
+	void inputTest(){
+		ascii = key.pull();
+		if(ascii){
+			oldAscii=ascii;
+			if(ascii=='\n'){
+				NL();
+			} else if(ascii=='\b'){
+				this->line-=5*this->multiply+this->padding;
+				screen.color=0x000000;
+				screen.drawSquare(line,column,line+(5*this->multiply),column+(7*this->multiply));
+			}else{
+				if ((this->line + (5*this->multiply) + this->padding)>1024){
+					NL();
+				} 
+				screen.color=0x000000;
+				screen.drawSquare(line,column,line+(5*this->multiply),column+(7*this->multiply));
+				screen.color=0xffffff;
+				printChar(ascii);
+				printString(": ");
+				printIntH((int)key.getKey());
+				NL();
+			}
+		}
+	}
 
 
 private:
 	char* dataAddres;
+	unsigned char second=99,oldsecond;
+	int pointerFlag=0;
+	int pointerDelay;
+	char oldAscii,ascii;
+
 };
 
 
