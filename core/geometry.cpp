@@ -1,10 +1,3 @@
-int abs(int a){ //абсолютное значение
-	if (a>0){
-		return a;
-	}
-	return -a;
-
-}
 
 void drawCircle(int R,int x1,int y1,int color){ //отрисовка круга
 	int x = 0;
