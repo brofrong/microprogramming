@@ -11,11 +11,12 @@ public:
 
 	video screen = video();
 	keyboard key = keyboard();
+
 	out(){
 		this->dataAddres=*(char**) (0x8004);
 	}
 
-	int column=58,line=0,multiply=2,padding=3;
+	int column=58,line=0,multiply=1,padding=3;
 	int startLine = 0;
 
 	void color(int a){
@@ -77,6 +78,12 @@ public:
 	void printInt(int var){
 		unsigned int mask=1000000000,flag=0;
 		char number;
+		
+		if(var==0){
+			printChar('0');
+			return;
+		}
+
 		while (mask){
 			number =(char) ((var / mask)%10 )+ 0x30;
 			
@@ -165,9 +172,10 @@ public:
 	}
 
 	void inputTest(){
-		ascii = key.pull();
-		if(ascii){
-			oldAscii=ascii;
+		Key=key.getKey();
+		if(Key!=oldKey){
+			oldKey=Key;
+			ascii = key.pull();
 			if(ascii=='\n'){
 				NL();
 			} else if(ascii=='\b'){
@@ -192,7 +200,7 @@ public:
 
 private:
 	char* dataAddres;
-	unsigned char second=99,oldsecond;
+	unsigned char second=99,oldsecond,oldKey,Key;
 	int pointerFlag=0;
 	int pointerDelay;
 	char oldAscii,ascii;

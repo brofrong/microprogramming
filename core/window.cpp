@@ -11,6 +11,7 @@ public:
 	out io = out();
 	//1024*768*24bit
 
+
 	window(){
 		screen.color = 0xffffff;
 		screen.drawLine(0,48,1024,48);
@@ -41,7 +42,7 @@ public:
 	void draw(){
 		this->drawTime();
 		this->drawFPS();
-		//this->drowProgram();
+		
 	}
 
 
@@ -104,7 +105,7 @@ private:
 		if (this->hour != this->oldHour){
 			this->oldHour = this->hour;
 			ed = hour%0x10+3;
-			if(ed>10){
+			if(ed>9){
 				ed-=10;
 				hour+=0x10;
 			}

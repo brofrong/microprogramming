@@ -1,6 +1,6 @@
 org 0x7c00
 mov ah,2
-mov al,20;секторы
+mov al,40;секторы
 mov bx,0x8008
 mov cl,2
 mov ch,0
@@ -10,7 +10,7 @@ int 0x13
 
 ;сегмент данных
 mov ah,2
-mov al,20 ;секторы
+mov al,25 ;секторы
 mov bx,0xf000
 mov cl,25; сектор диска, с которого нужно считать
 mov ch,0
