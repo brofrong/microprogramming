@@ -4,11 +4,14 @@
 #include "CMOS.h"
 #include "video.cpp"
 #include "stdio.cpp"
+#include "drawBMP.cpp"
+
 class window
 {
 public:
 	video screen = video();
 	out io = out();
+	BMP bmp = BMP();
 	//1024*768*24bit
 
 
@@ -25,6 +28,10 @@ public:
 		io.column=10;
 		io.multiply=3;
 	};
+
+	void drawBMP(){
+		bmp.drawBMP(0x11000);
+	}
 
 	void reDraw(){
 		screen.color = 0x000000;

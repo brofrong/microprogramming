@@ -14,14 +14,18 @@ int _start(){
 	pong = pongGame();
 
 	//screen.drawSquare(100,100,200,200);
-	//io.printString("qwertyuiopasdfghjkl;zxcvbnm,");
-	//io.multiply=5;
+	win.drawBMP();
+	
+	
+
+
+
 	while(1){
 		if (win.FPSLimiter(60)){
 			win.draw();
-			pong.draw();
+			//pong.draw();
 			//io.drawPointer();
-			io.input();
+			//io.input();
 		}
 	}
 	while(1);
