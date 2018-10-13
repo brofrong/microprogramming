@@ -6,21 +6,20 @@
 class video
 {
 public:
-	int color = 0xffffff;
-	int printX = 0;
-	int printY = 0;
-
+	unsigned int color = 0xffffff;
 
 	video(){
 		this->videoAddr=*(char**) (0x8000);
-		this->dataAddres=*(char**) (0x8004);
 	};
 
 	void setPixel(int x,int y){
-		char *p;
-		p=this->videoAddr;
-		p+=((y*1024)+x)*3;
-		*(int*)p=this->color;
+		if (x>0 && x<1024){
+			char *p;
+			p=this->videoAddr;
+			p+=((y*1024)+x)*3;
+			*(int*)p= *(int*)(p) & 0xff000000 | this->color & 0x00ffffff;
+		}
+
 	}
 
 	void drawLine(int x0, int y0, int x1, int y1){
@@ -38,7 +37,7 @@ public:
 			}
 		}
 	}
-	/*
+	
 	void drawCircle(int R,int x1,int y1){
 		int x = 0;
 		int y = R;
@@ -63,9 +62,9 @@ public:
 			delta += 2*(x-y);
 			y--;
 		}
-	}*/
+	}
 	
-	/*void drawCircleFill(int R,int x1,int y1){
+	void drawCircleFill(int R,int x1,int y1){
 		int x = 0;
 		int y = R;
 		int delta = 1-2*R;
@@ -87,7 +86,7 @@ public:
 			delta += 2*(x-y);
 			y--;
 		}
-	}*/
+	}
 
 
 
@@ -99,57 +98,9 @@ public:
 		}
 	}
 
-	
-	/*void drawChar(int x,int y,int multiplier, char letter){
-		if (letter>='a'&&letter<='w'){
-			letter-=0x20;
-		}
-		int currpos=36*(int)letter;
-		if (*(this->dataAddres+currpos)){//if printable
-			if (multiplier<=1){
-				for (int i=0;i<7;i++){
-					for (int j=0;j<5;j++){
-						if (*(this->dataAddres+i*5+j+currpos+1)){
-							this->setPixel(x+j,y+i);
-						}
-					}
-				}
-			} else{
-				for (int i=0;i<7;i++){
-					for (int j=0;j<5;j++){
-						if (*(this->dataAddres+i*5+j+currpos+1)){
-							this->drawSquare(x+j*multiplier,y+i*multiplier,x+j*multiplier+multiplier,y+i*multiplier+multiplier);
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	void drawString(char *message,int x,int y,int multiplier,int offset){
-		int i=0;
-		int startx=x;
-		while (message[i]){ 
-			if (message[i]=='\n'){ //перенос строки
-				x=startx;
-				y+=offset+(multiplier*7);
-				i++;
-				continue;
-			}
-			if ((x + (5*multiplier) + offset)>1024){
-				x=startx;
-				y+=offset+(multiplier*7);
-			}
-			this->drawChar(x,y,multiplier,message[i]);
-			x += (5*multiplier) + offset; //позиция для следующей буквы
-			i++;
-		}
-	}*/
-
 
 private:
 	char* videoAddr;
-	char* dataAddres;
 
 	void drawLineLow(int x0,int y0,int x1,int y1){
 		int dx = x1-x0;

@@ -22,6 +22,14 @@ disc.seek(0x3000,0);
 disc.write(dataText);
 data.close();
 
+img = open("img/gurren.bmp","rb")
+imgbit = img.read();
+disc.seek(0x5000,0);
+disc.write(imgbit);
+img.close();
+
+
 disc.close()
 
 print("all OK")
+//0x13

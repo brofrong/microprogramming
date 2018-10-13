@@ -4,12 +4,16 @@
 #include "CMOS.h"
 #include "video.cpp"
 #include "stdio.cpp"
+#include "drawBMP.cpp"
+
 class window
 {
 public:
 	video screen = video();
 	out io = out();
+	BMP bmp = BMP();
 	//1024*768*24bit
+
 
 	window(){
 		screen.color = 0xffffff;
@@ -24,6 +28,10 @@ public:
 		io.column=10;
 		io.multiply=3;
 	};
+
+	void drawBMP(){
+		bmp.drawBMP(0x11000);
+	}
 
 	void reDraw(){
 		screen.color = 0x000000;
@@ -41,7 +49,7 @@ public:
 	void draw(){
 		this->drawTime();
 		this->drawFPS();
-		//this->drowProgram();
+		
 	}
 
 
@@ -104,7 +112,7 @@ private:
 		if (this->hour != this->oldHour){
 			this->oldHour = this->hour;
 			ed = hour%0x10+3;
-			if(ed>10){
+			if(ed>9){
 				ed-=10;
 				hour+=0x10;
 			}

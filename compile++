@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir core/tmp
 g++ -m32 -c core/math.cpp -o core/tmp/math.o
 g++ -m32 -c core/video.cpp -o core/tmp/video.o
 g++ -m32 -c core/window.cpp -o core/tmp/window.o
@@ -26,5 +27,6 @@ python3 compile.py
 rm main.bin
 rm boot.bin
 rm core/tmp/*.o
+rmdir core/tmp
 
 qemu-system-i386 discpy.img
