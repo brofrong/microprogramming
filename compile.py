@@ -32,3 +32,4 @@ img.close();
 disc.close()
 
 print("all OK")
+//0x13

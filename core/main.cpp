@@ -14,11 +14,11 @@ int _start(){
 	pong = pongGame();
 
 	//screen.drawSquare(100,100,200,200);
+
 	win.drawBMP();
-	
-	
-
-
+		
+	//io.printString("qwertyuiopasdfghjkl;zxcvbnm,");
+	//io.multiply=5;
 
 	while(1){
 		if (win.FPSLimiter(60)){
