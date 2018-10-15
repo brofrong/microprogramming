@@ -5,19 +5,19 @@
 #include "window.cpp"
 #include "stdio.cpp"
 #include "pong.cpp"
-
+#include "disc.cpp"
 
 int _start(){
 	//video screen = video();
 	window win = window();
 	out io = out();
 	pong = pongGame();
-
+	hdd drive = hdd();
 	//screen.drawSquare(100,100,200,200);
-	win.drawBMP();
 	
-	
+	io.multiply=5;
 
+	win.drawBMP(0x28);
 
 
 	while(1){

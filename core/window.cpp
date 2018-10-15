@@ -29,8 +29,8 @@ public:
 		io.multiply=3;
 	};
 
-	void drawBMP(){
-		bmp.drawBMP(0x11000);
+	void drawBMP(int startSecotor){
+		bmp.drawBMP(startSecotor);
 	}
 
 	void reDraw(){
