@@ -18,6 +18,11 @@ int _start(){
 	io.multiply=5;
 
 	win.drawBMP(0x28);
+	win.drawBMP(4361);
+	win.drawBMP(8682);
+	win.drawBMP(11851);
+	win.drawBMP(16172);
+	win.drawBMP(20493);
 
 
 	while(1){

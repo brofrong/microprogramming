@@ -12,12 +12,12 @@ public:
 	video screen = video();
 	out io = out();
 	BMP bmp = BMP();
-	//1024*768*24bit
+	//1024*720*24bit
 
 
 	window(){
 		screen.color = 0xffffff;
-		screen.drawLine(0,48,1024,48);
+		screen.drawLine(0,47,1024,47);
 		//minutes - seconds
 		screen.drawSquare(970,12,975,17);
 		screen.drawSquare(970,25,975,30);
@@ -37,7 +37,7 @@ public:
 		screen.color = 0x000000;
 		screen.drawSquare(0,0,1024,48);
 		screen.color = 0xffffff;
-		screen.drawLine(0,48,1024,48);
+		screen.drawLine(0,47,1024,47);
 		//minutes - seconds
 		screen.drawSquare(970,12,975,17);
 		screen.drawSquare(970,25,975,30);

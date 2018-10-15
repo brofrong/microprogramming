@@ -8,6 +8,7 @@ class BMP{
     //out io = out();
     //*((char*)(0x11000)); 
     public:
+    int startx=0,starty=48;
     int drawBMP(int startSector){
         getSize(startSector);
         disc.readData(this->address,this->size,startSector);
@@ -28,7 +29,7 @@ class BMP{
                 
                 color = red * 0x10000 + green * 0x100 + blue; 
                 screen.color = color; 
-                screen.setPixel(j,i+100);
+                screen.setPixel(j+startx,i+starty);
             }
         }
 
@@ -48,9 +49,9 @@ class BMP{
     int address = 0x100000;
     char* bitMapAddress;
     void getParameters(){
-        this->width = (int) (*((char*)(address + 0x12)) + *((char*)(address + 0x13))*0x100);
-        this->height = (int) (*((char*)(address + 0x16))+ *((char*)(address + 0x17))*0x100);   
-        this->bitMapAddress = (char*)(((int) (*((char*)(address + 0x0A)))) + address);
+        this->width = (int) (*((unsigned char*)(address + 0x12)) + *((unsigned char*)(address + 0x13))*0x100);
+        this->height = (int) (*((unsigned char*)(address + 0x16))+ *((unsigned char*)(address + 0x17))*0x100);   
+        this->bitMapAddress = (char*)(((int) (*((unsigned char*)(address + 0x0A)))) + address);
     }
     
 
