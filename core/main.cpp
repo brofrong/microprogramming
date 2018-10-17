@@ -5,16 +5,12 @@
 #include "window.cpp"
 #include "stdio.cpp"
 #include "pong.cpp"
-#include "disc.cpp"
-#include "drawImgs.cpp"
 
 int _start(){
 	//video screen = video();
 	window win = window();
 	out io = out();
 	pong = pongGame();
-	//drawImg prog = drawImg();
-	hdd drive = hdd();
 	//screen.drawSquare(100,100,200,200);
 	
 	io.multiply=5;
@@ -28,6 +24,14 @@ int _start(){
 	
 	
 	
+
+	win.bmp.drawBMP(0x28);
+	win.bmp.drawBMP(4361);
+	win.bmp.drawBMP(8682);
+	win.bmp.drawBMP(11851);
+	win.bmp.drawBMP(16172);
+	win.bmp.drawBMP(20493);
+
 
 	while(1){
 		if (win.FPSLimiter(60)){
