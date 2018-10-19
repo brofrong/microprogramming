@@ -29,9 +29,7 @@ public:
 		io.multiply=3;
 	};
 
-	void drawBMP(int startSecotor){
-		bmp.drawBMP(startSecotor);
-	}
+
 
 	void reDraw(){
 		screen.color = 0x000000;

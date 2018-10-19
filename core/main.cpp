@@ -17,12 +17,14 @@ int _start(){
 	
 	io.multiply=5;
 
-	win.drawBMP(0x28);
-	win.drawBMP(4361);
-	win.drawBMP(8682);
-	win.drawBMP(11851);
-	win.drawBMP(16172);
-	win.drawBMP(20493);
+	//win.bmp.drawBMP(40);
+	//win.bmp.startx=100;
+	//win.bmp.drawBMP(4361);
+	/*win.bmp.startx=420;
+	win.bmp.drawBMP(533);*/
+	//win.drawBMP(11851);
+	win.bmp.drawBMP(16172);
+	//win.drawBMP(20493);
 
 
 	while(1){
@@ -30,7 +32,7 @@ int _start(){
 			win.draw();
 			//pong.draw();
 			//io.drawPointer();
-			//io.input();
+			io.input();
 		}
 	}
 	while(1);
