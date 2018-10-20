@@ -191,7 +191,7 @@ public:
 				screen.color=0xffffff;
 				printChar(ascii);
 				printString(": ");
-				printIntH((int)key.getKey());
+				printInt((int)key.getKey());
 				NL();
 			}
 		}

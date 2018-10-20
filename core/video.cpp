@@ -98,6 +98,14 @@ public:
 		}
 	}
 
+	void clearArea(){
+		for (int i=48;i<768;i++){
+			for (int j=0;j<1024;j++){
+				setPixel(j,i);
+			}
+		}
+	}
+
 
 private:
 	char* videoAddr;

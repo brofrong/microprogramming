@@ -1,19 +1,26 @@
+#ifndef DRAWBMP_CPP
+#define DRAWBMP_CPP
+
 #include "video.cpp"
 #include "disc.cpp"
 //#include "stdio.cpp"
 
 class BMP{
-    hdd disc = hdd();
     video screen = video();
+    hdd disk = hdd();
     //out io = out();
     //*((char*)(0x11000)); 
     public:
+    int center = 0;
     int startx=0,starty=48;
     int drawBMP(int startSector){
         getSize(startSector);
-        disc.readData(this->address,this->size,startSector);
+        disk.readData(this->address,this->size,startSector);
         getParameters();
-        
+        if(center){
+            startx=(1024-width)/2;
+            starty=(720-height)/2+48;
+        }
 
         for(int i=0;i<height;i++){
             for(int j=0;j<width;j++){
@@ -38,7 +45,7 @@ class BMP{
     private:
 
     int getSize(int startSector){
-        disc.readData(this->address,1,startSector);
+        disk.readData(this->address,1,startSector);
         this->size = ((int) *((unsigned char*)(this->address + 0x2))) + ((int)*((unsigned char*)(this->address + 0x3))*0x100) +((int) *((unsigned char*)(this->address + 0x4))*0x10000) + ((int)*((unsigned char*)(this->address + 0x5))*0x1000000); 
         this->size = (this->size/0x200)+1;
         return this->size;
@@ -58,3 +65,4 @@ class BMP{
 
 };
 
+#endif

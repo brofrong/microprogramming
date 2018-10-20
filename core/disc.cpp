@@ -5,13 +5,13 @@ class hdd{
     public:
         
         void readData(int adr,int sectors,int startSector){
-                while(sectors>128){
-                    readSectors(adr,128,startSector);
-                    adr+=0x10000;
-                    startSector+=128;
-                    sectors-=128;
-                }
-            readSectors(adr,sectors,startSector);
+            while(sectors>0){
+                readSectors(adr,128,startSector);
+                adr+=0x10000;
+                startSector+=128;
+                sectors-=128;
+            }
+            //readSectors(adr,sectors,startSector);
         }
     private:
         void readSectors(int adr,unsigned char sectors,int startSector){
