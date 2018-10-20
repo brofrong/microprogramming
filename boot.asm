@@ -1,24 +1,13 @@
 org 0x7c00
 mov ah,2
 mov al,40;секторы
-mov bx,0x8008
+mov bx,0x8004
 mov cl,2
 mov ch,0
 mov dh,0
 mov dl,0x80
 int 0x13
 
-;сегмент данных
-mov ah,2
-mov al,10 ;секторы
-mov bx,0xf000
-mov cl,25; сектор диска, с которого нужно считать
-mov ch,0
-mov dh,0
-mov dl,0x80
-int 0x13
-
-mov dword[0x8004],0xf000
 
 call initVesa
 cli
@@ -36,7 +25,7 @@ lgdt[gd_table]
 mov eax,cr0
 or eax,1
 mov cr0,eax
-jmp CODE_D:0x8008
+jmp CODE_D:0x8004
 ret
 ;дескриптор
 gdt_begin:

@@ -15,7 +15,7 @@ class hdd{
         }
     private:
         void readSectors(int adr,unsigned char sectors,int startSector){
-            unsigned char flag=128,b=2;
+            unsigned char flag=128;
             asm("mov edi,[bp+12]");//адресс куда писать
             
             asm("mov edx,0x01f2");//сколько секторов читать

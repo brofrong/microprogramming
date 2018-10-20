@@ -67,6 +67,7 @@ public:
 		return (0);
 	}
 
+
 private:
 
 	unsigned char second,oldSecond=0,minute,oldMinute=0,hour,oldHour;

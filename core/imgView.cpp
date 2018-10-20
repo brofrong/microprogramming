@@ -1,6 +1,6 @@
-#include "keyboard.cpp";
-#include "drawBMP.cpp";
-#include "disc.cpp";
+#include "keyboard.cpp"
+#include "drawBMP.cpp"
+#include "disc.cpp"
 
 class imgView{
     public:
@@ -8,6 +8,8 @@ class imgView{
             disk.readData(addr,1,0x21);
             getCountImgs();
             drawBMP.center=1;
+            drawBMP.clear=1;
+            //drawBMP.drawNear=1;
         }
 
         void update(){
