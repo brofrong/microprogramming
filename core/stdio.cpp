@@ -64,7 +64,7 @@ public:
 				i++;
 				continue;
 			} else{
-				if ((this->line + (5*this->multiply) + this->padding)>1024){
+				if ((this->line + (widthLetter*this->multiply) + this->padding)>1024){
 					this->NL();
 				}
 				this->printChar(message[i]);
@@ -158,14 +158,14 @@ public:
 				if(line>0){
 					this->line-=5*this->multiply+this->padding;
 					screen.color=0x000000;
-					screen.drawSquare(line,column,line+(5*this->multiply),column+(7*this->multiply));
+					screen.drawSquare(line,column,line+(widthLetter*this->multiply),column+(heightLetter*this->multiply));
 				}else {
 					//перенос на строчку назад, но где она кончилась?
 					this->line=1024;
-					this->column-=this->padding+(this->multiply*7);
+					this->column-=this->padding+(this->multiply*heightLetter);
 				}
 			}else{
-				if ((this->line + (5*this->multiply) + this->padding)>1024){
+				if ((this->line + (widthLetter*this->multiply) + this->padding)>1024){
 					NL();
 				} 
 				screen.color=0xffffff;
@@ -184,13 +184,13 @@ public:
 			} else if(ascii=='\b'){
 				this->line-=5*this->multiply+this->padding;
 				screen.color=0x000000;
-				screen.drawSquare(line,column,line+(5*this->multiply),column+(7*this->multiply));
+				screen.drawSquare(line,column,line+(widthLetter*this->multiply),column+(heightLetter*this->multiply));
 			}else{
-				if ((this->line + (5*this->multiply) + this->padding)>1024){
+				if ((this->line + (widthLetter*this->multiply) + this->padding)>1024){
 					NL();
 				} 
 				screen.color=0x000000;
-				screen.drawSquare(line,column,line+(5*this->multiply),column+(7*this->multiply));
+				screen.drawSquare(line,column,line+(widthLetter*this->multiply),column+(heightLetter*this->multiply));
 				screen.color=0xffffff;
 				printChar(ascii);
 				printString(": ");
