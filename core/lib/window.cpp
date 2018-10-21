@@ -23,7 +23,7 @@ public:
 		screen.drawSquare(920,25,925,30);
 		
 		io.column=10;
-		io.multiply=3;
+		io.fontSize(21);
 	};
 
 

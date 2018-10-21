@@ -12,8 +12,7 @@ int _start(){
 	hdd disk = hdd();
 	disk.readData(0x80000,2,0x18);
 	out io = out();
-	io.multiply=1;
-
+	io.fontSize(50);
 	io.printString("qwertyu12334567ab\nQWERTYUIOPASDFGHJKLZXCVBNM\n1234567890-=`'/");
 	//video screen = video();
 	window win = window();
@@ -31,7 +30,7 @@ int _start(){
 			prog.update();
 			//pong.draw();
 			//io.drawPointer();
-			io.input();
+			//io.input();
 		}
 	}
 	while(1);

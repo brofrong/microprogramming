@@ -13,7 +13,7 @@ public:
 	video screen = video();
 	keyboard key = keyboard();
 
-	int column=58,line=0,multiply=1,padding=3;
+	int column=58,line=0,padding=3;
 	int startLine = 0;
 
 	out(){
@@ -24,6 +24,13 @@ public:
 
 	void color(int a){
 		screen.color=a;
+	}
+	int fontSize(int px){
+		this->multiply = px/this->heightLetter;
+		if(this->multiply<1){
+			this->multiply=1;
+		}
+		return(this->multiply);
 	}
 
 	void printChar(unsigned char letter){
@@ -205,7 +212,7 @@ private:
 	char widthLetter=5,heightLetter=7,bitsFotLetter=5;
 	char* dataAddres = (char*) 0x80000;
 	unsigned char second=99,oldsecond,oldKey,Key;
-	int pointerFlag=0;
+	int pointerFlag=0,multiply=1;
 	int pointerDelay;
 	char oldAscii,ascii;
 
