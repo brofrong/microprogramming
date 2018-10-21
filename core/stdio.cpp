@@ -16,15 +16,20 @@ public:
 	int column=58,line=0,multiply=1,padding=3;
 	int startLine = 0;
 
+	out(){
+		widthLetter = *(unsigned char*)(dataAddres);
+		heightLetter = *(unsigned char*)(dataAddres+1);
+		bitsFotLetter = *(unsigned char*)(dataAddres+2);
+	}
+
 	void color(int a){
 		screen.color=a;
 	}
 
 	void printChar(unsigned char letter){
-		int currpos=5*(unsigned int)letter;
-			int widthLetter=5,heightLetter=7;
+		int currpos=bitsFotLetter*(unsigned int)letter;	
 			int x=0,y=0;
-			for (int i =0;i<5;i++){
+			for (int i =0;i<bitsFotLetter;i++){
 				unsigned char mask = 128;
 				unsigned char byte = *(dataAddres+i+currpos);
 				for (int j=0;j<8;j++){
@@ -45,9 +50,9 @@ public:
 				}
 			}
 			if(multiply<=1){
-				this->line+=5+this->padding;	
+				this->line+=widthLetter+this->padding;	
 			} else{
-				this->line+=5*this->multiply+this->padding;
+				this->line+=widthLetter*this->multiply+this->padding;
 			}	
 	}
 
@@ -197,6 +202,7 @@ public:
 
 
 private:
+	char widthLetter=5,heightLetter=7,bitsFotLetter=5;
 	char* dataAddres = (char*) 0x80000;
 	unsigned char second=99,oldsecond,oldKey,Key;
 	int pointerFlag=0;
