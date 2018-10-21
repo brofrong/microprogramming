@@ -41,10 +41,9 @@ for i in range(0,math.ceil(len(fontData)/sizeFromLetterToanatherLetter)):
     for j in range(0,8-len(bit)%8):
         bit += "0";
 
-
     for j in range(0,math.ceil(len(bit)/8)):
         bitval = bit[j*8:8+j*8];
-        counter = heigh;
+        counter = 7;
         val=0;
         for x in bitval:
             val += int  (x)*2**counter;
