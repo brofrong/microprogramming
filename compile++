@@ -1,10 +1,12 @@
 #!/bin/bash
 mkdir core/tmp
-g++ -m32 -c core/math.cpp -o core/tmp/math.o
-g++ -m32 -c core/video.cpp -o core/tmp/video.o
-g++ -m32 -c core/window.cpp -o core/tmp/window.o
-g++ -m32 -c core/stdio.cpp -o core/tmp/stdio.o
-g++ -m32 -c -masm=intel -nostdlib -fpic core/CMOS.cpp -o core/tmp/CMOS.o
+
+g++ -m32 -c core/lib/math.cpp -o core/tmp/math.o
+g++ -m32 -c core/system/video.cpp -o core/tmp/video.o
+g++ -m32 -c core/lib/window.cpp -o core/tmp/window.o
+g++ -m32 -c core/lib/stdio.cpp -o core/tmp/stdio.o
+g++ -m32 -c -masm=intel -nostdlib -fpic core/system/CMOS.cpp -o core/tmp/CMOS.o
+g++ -m32 -c -masm=intel -nostdlib -fpic core/system/disc.cpp -o core/tmp/disc.o
 
 g++ -nostdlib -m32 -fpic -masm=intel core/main.cpp core/tmp/*.o -o main.bin
 if [ $? -ne 0 ]; then

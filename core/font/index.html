@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>Brofrong</title>
+        <meta name="Brofrong" content="Brofrong's ofishial site">
+
+        <style>
+            .menu{
+                width:20%;
+                position: fixed;
+            }
+            .params{
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+            }
+            .params div{
+                border:1px solid gray;
+                margin: 10px;
+                text-align: center;
+                width:20px;
+                height: 1em;
+            }
+            .buttons{
+                display: flex;
+                justify-content: center;
+            }
+            .buttons div{
+                margin: 5px;
+                border:1px solid gray;
+                cursor: pointer;
+                padding: 5px;
+            }
+            .buttons div:hover{
+                background-color:lightgray;
+            }
+
+            .column{
+                width: 60%;
+                margin: auto;
+                display: flex;
+                justify-content: center;
+               
+            }
+            .raw{
+                width:100%;
+                max-width: 50px;
+                height: 25px;
+                background-color: white;
+                border:1px solid gray;
+                user-select: none;
+            }
+            textarea{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="menu">
+            <div class="params">
+                    <p>width:</p><div class="width" id="width" contenteditable role="text">5</div>
+                    <p>height:</p><div class="height" id="height" contenteditable role="text">7</div>
+            </div>
+            <div class="buttons">
+                <div class="button" role="button">clear</div>
+                <div class="button" role="button">draw</div>
+            </div>
+            <textarea></textarea>
+
+        </div>
+        <div class="container">
+            <div class="column">
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+            </div>
+            <div class="column">
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+            </div>
+            <div class="column">
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+            </div>
+            <div class="column">
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+            </div>
+            <div class="column">
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+            </div>
+            <div class="column">
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+            </div>
+            <div class="column">
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+                <div class="raw"></div>
+            </div>
+        </div>
+        <p>по нажатью на <b>Enter</b> битКарта будет отображена в консоле и автоматически помещена в буфер обмена</p>
+        <p>по нажатью на <b>R</b> очистить область для рисования</p>
+    </body>
+    <script>
+    var container = document.querySelector(".container");
+var elements = document.querySelectorAll(".raw");
+var textArea = document.querySelector("textarea");
+
+var width =5;
+var height =7;
+
+function addEventToRow(){
+    for (var i=0;i<elements.length;i++){
+        elements[i].addEventListener("mouseenter",(e)=>
+        {
+            if (e.buttons>0){
+                if(e.target.style.backgroundColor != "rgb(0, 0, 0)"){
+                    e.target.style.backgroundColor = "#000";
+                } else{
+                    e.target.style.backgroundColor = "#fff";
+                }
+            }
+        });
+        elements[i].addEventListener("mousedown",(e)=>
+        {
+            if(e.target.style.backgroundColor != "rgb(0, 0, 0)"){
+                e.target.style.backgroundColor = "#000";
+            } else{
+                e.target.style.backgroundColor = "#fff";
+            }
+            
+        });
+    }
+}
+document.addEventListener("keypress",(e)=>{
+    if(e.code=="KeyR"){
+        clear();
+    }
+    if (e.code=="Enter"){
+        writeElemets();
+    }
+});
+
+function writeElemets(){
+    var bitmap="";
+    for(var i=0;i<height;i++){
+        for (var j=0;j<width;j++){
+            if(elements[i*width+j].style.backgroundColor== "rgb(0, 0, 0)"){
+                bitmap += "1";
+            }else{
+                bitmap += "0";
+            }
+        }
+        bitmap += "\n"
+    }
+    textArea.style.display="block";
+    textArea.value=bitmap;
+    textArea.select();
+    document.execCommand("copy");
+    textArea.style.display="none";
+    console.log(bitmap);
+}
+
+function resizeElemets(){
+    var height = elements[0].clientWidth;
+    //console.log(elements[0].clientWidth);
+    for(var i=0;i<elements.length;i++){
+        elements[i].style.height = height+'px';
+    }
+}
+
+function clear(){
+    width = +document.getElementById("width").innerText;
+    height = +document.getElementById("height").innerText;
+    container.innerHTML = "";
+
+    for (var i =0;i<height;i++){
+        var column = document.createElement("div");
+        column.classList.add("column");
+        for(var j = 0 ;j<width;j++){
+            var raw = document.createElement("div");
+            raw.classList.add("raw");
+            column.appendChild(raw);
+        }
+        container.appendChild(column);
+    }
+    elements = document.querySelectorAll(".raw");
+    resizeElemets();
+    addEventToRow();
+
+}
+
+addEventToRow();
+resizeElemets();
+window.onresize = resizeElemets;
+var buttons  = document.querySelectorAll(".button");
+buttons[0].onclick = clear;
+buttons[1].onclick = writeElemets;</script>
+</html>
