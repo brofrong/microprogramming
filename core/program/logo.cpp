@@ -1,5 +1,6 @@
 #include "../system/video.cpp"
-
+#include "../lib/stdio.cpp"
+#include "../system/CMOS.h"
 //1024 * 768
 class Logo{
 public:
@@ -40,19 +41,96 @@ public:
             screen.drawSquare(dotsX[i],((t+dotsH[i])*dotsS[i])%758,dotsX[i]+5,((t+dotsH[i])*dotsS[i])%758+dotsS[i]);
         }
 
+        if(t>40){
+            io.column = 360;
+            io.line = 400;
+            io.fontSize(50);
+            io.printChar('B');
+        }
+        if(t>50){
+            io.printChar('r');
+        }
+        if(t>60){
+            io.printChar('o');
+        }
+        if(t>70){
+            io.printChar(' ');
+            io.printChar('O');
+        }
+        if(t>80){
+            io.printChar('S');
+        }
 
-        if (t>200){
+        if(t>100){
+            io.line = 480;
+            io.column = 420;
+            io.printChar('=');
+        }
+        if(t>100){
+            io.line = 520;
+            io.printChar('3');
+        }
+
+        if (t>150){
             screen.color = 0x000000;
             screen.drawSquare(0,0,1024,768);
+            t=0;
             return 0;
         }
         t++;
         return 1;
     }
+
+    int updateExit(){
+        darkerSquare(0,0,1024,768);
+        for (int i=0;i<150;i++){
+            screen.color = dotsC[i];
+            screen.drawSquare(dotsX[i],((t+dotsH[i])*dotsS[i])%758,dotsX[i]+5,((t+dotsH[i])*dotsS[i])%758+dotsS[i]);
+        }
+
+        if(t>5){
+            io.column = 360;
+            io.line = 360;
+            io.fontSize(50);
+            io.printChar('G');
+        }
+        if(t>10){
+            io.printChar('o');
+        }
+        if(t>15){
+            io.printChar('o');
+        }
+        if(t>20){
+            io.printChar('d');
+            io.printChar(' ');
+        }
+        if(t>25){
+            io.printChar('b');
+        }
+        if(t>30){
+            io.printChar('y');
+        }
+        if(t>35){
+            io.printChar('e');
+        }
+
+        if (t>50){
+            screen.color = 0x000000;
+            screen.drawSquare(0,0,1024,768);
+            io.line = 60;
+            io.printString("Power can be turned off");
+            outb(0xf4, 0x00);
+            return 0;
+        }
+        t++;
+        return 1;
+    }
+
 private:
     int dotsX[150],dotsC[150],dotsS[150],dotsH[150];
 
     char* videoAddr;
+    out io = out();
     video screen = video();
     int t=0,darkerSpeed = 15;
     void darkerSquare(int x0,int y0,int x1,int y1){

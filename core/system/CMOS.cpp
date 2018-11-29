@@ -1,6 +1,13 @@
 
 #include "CMOS.h"
 
+unsigned char outb(unsigned char port,unsigned char arg){
+	asm("xor eax,eax");
+	asm("mov al, byte ptr[bp + 12]");
+	asm("xor eax,eax");
+	asm("mov edx, byte ptr[bp + 8]");
+	asm("out dx,al");
+}
 
 unsigned char getCMOS(unsigned char data){
 	asm("xor eax,eax");

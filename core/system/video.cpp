@@ -98,10 +98,10 @@ public:
 		}
 	}
 
-
+	char* videoAddr;
 
 private:
-	char* videoAddr;
+	
 
 	void drawLineLow(int x0,int y0,int x1,int y1){
 		int dx = x1-x0;

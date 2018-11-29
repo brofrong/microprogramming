@@ -1,10 +1,10 @@
 #ifndef PONG_CPP
 #define PONG_CPP
 
-#include "video.cpp"
-#include "stdio.cpp"
-#include "math.h"
-#include "keyboard.cpp"
+#include "../system/video.cpp"
+#include "../lib/stdio.cpp"
+#include "../lib/math.h"
+#include "../system/keyboard.cpp"
 
 class pongGame{
 public:
@@ -61,7 +61,7 @@ private:
 	}
 
 	void drawScore(){
-		io.multiply=5;
+		io.fontSize(30);
 		io.color(0xffffff);
 		io.column = 58; 
 		io.line = 200;

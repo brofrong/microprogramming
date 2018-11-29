@@ -1,6 +1,7 @@
 #ifndef WINDOW_CPP
 #define WINDOW_CPP
 
+#include "../system/keyboard.cpp"
 #include "../system/CMOS.h"
 #include "../system/video.cpp"
 #include "stdio.cpp"
@@ -10,6 +11,7 @@ class window
 public:
 	video screen = video();
 	out io = out();
+	keyboard key = keyboard();
 	//1024*720*24bit
 
 	window(){
@@ -41,9 +43,11 @@ public:
 		screen.drawSquare(920,25,925,30);
 	}
 
+	
+	
 	void draw(){
 		this->drawTime();
-		this->drawFPS();
+		//this->drawFPS();
 		
 	}
 
@@ -64,9 +68,17 @@ public:
 		return (0);
 	}
 
+	int exit(){
+		button = key.getKey();
+
+		if(button == exitButton-0x61){
+			return 1;
+		}
+		return 0;
+	}
 
 private:
-
+	unsigned char exitButton = 'q',button=0;
 	unsigned char second,oldSecond=0,minute,oldMinute=0,hour,oldHour;
 	int i;
 

@@ -52,6 +52,9 @@ class BMP{
 
     }
 
+    /*void fastDraw(){
+        disk.readData((int)screen.videoAddr+1024*200,4320,40);
+    }*/
     private:
 
     int getSize(int startSector){

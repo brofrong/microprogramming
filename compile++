@@ -31,4 +31,4 @@ rm boot.bin
 rm core/tmp/*.o
 rmdir core/tmp
 
-qemu-system-i386 discpy.img
+qemu-system-i386 -device isa-debug-exit,iobase=0xf4,iosize=0x04 discpy.img

@@ -27,7 +27,8 @@ data.close();
 sectorsADR=[];
 
 disc.seek(0x5000,0);
-imgs = ['img/totoro.bmp','img/castle.bmp','img/gurren.bmp','img/dark-souls.bmp','img/water.bmp','img/room.bmp','img/1-320.bmp','img/2-320.bmp','img/3_320.bmp','img/1-320.bmp'];
+#imgs = ["img/bit/totoro.bit"];
+imgs = ['img/totoro.bmp','img/castle.bmp','img/gurren.bmp','img/dark-souls.bmp','img/water.bmp','img/room.bmp','img/1-320.bmp','img/2-320.bmp','img/3_320.bmp','img/I.bmp','img/I_2.bmp'];
 #imgs = ['img/1_100.bmp','img/1-320.bmp','img/2-320.bmp','img/3_320.bmp'];
 for x in imgs:
 	img = open(x,"rb")
@@ -41,7 +42,7 @@ for x in imgs:
 	img.close();
 
 byteAdrArr = [];
-#print(sectorsADR);
+print(sectorsADR);
 for x in sectorsADR:
 	for i in range(0,4):
 		byteAdrArr.append((x//(0x100**i))%0x100);
@@ -58,4 +59,3 @@ disc.close()
 disc.close()
 
 print("all OK")
-//0x13
