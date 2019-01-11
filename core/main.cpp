@@ -21,7 +21,7 @@ int _start(){
 	imgView prog = imgView();
 	//io.multiply=5;
 
-	win.drawBMP();
+	//win.drawBMP();
 		
 	//io.printString("qwertyuiopasdfghjkl;zxcvbnm,");
 	//io.multiply=5;
